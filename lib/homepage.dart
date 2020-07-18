@@ -4,6 +4,8 @@ import 'package:znsn/components/simple_card.dart';
 import 'package:znsn/components/bottom_button.dart';
 import 'package:znsn/constants.dart';
 import 'package:znsn/components/simple_text.dart';
+import 'package:znsn/resultpage.dart';
+import 'dart:math';
 
 class Homepage extends StatefulWidget {
   @override
@@ -15,6 +17,10 @@ class _HomepageState extends State<Homepage> {
   int rate = 0;
   int yield = 0;
   int years = 0;
+
+  double compoundInterest() {
+    return budget * pow((1 + (yield / 100)), years);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +185,15 @@ class _HomepageState extends State<Homepage> {
           ),
           BottomButton(
               onTap: () {
-                print("clicked");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultPage(
+                      budget: budget,
+                      compoundInterest: compoundInterest(),
+                    ),
+                  ),
+                );
               },
               buttonTitle: "Rechnen")
         ],
