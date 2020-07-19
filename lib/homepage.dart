@@ -52,6 +52,7 @@ class _HomepageState extends State<Homepage> {
                     ),
                     child: Slider(
                       value: budget.toDouble(),
+                      divisions: 1000,
                       min: 0.0,
                       max: 100000.00,
                       onChanged: (double newValue) {
@@ -85,6 +86,7 @@ class _HomepageState extends State<Homepage> {
                     ),
                     child: Slider(
                       value: rate.toDouble(),
+                      divisions: 100,
                       min: 0.0,
                       max: 20000.00,
                       onChanged: (double newValue) {
