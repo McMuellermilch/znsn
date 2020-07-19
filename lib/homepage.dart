@@ -38,7 +38,11 @@ class _HomepageState extends State<Homepage> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  SimpleText(numberValue: budget, text: '€'),
+                  SimpleText(
+                    numberValue: budget,
+                    text: '€',
+                    style: kNumberValueTextStyle,
+                  ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       inactiveTrackColor: Color(0xFF8D8E98),
@@ -72,7 +76,11 @@ class _HomepageState extends State<Homepage> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  SimpleText(numberValue: rate, text: '€ /Monat'),
+                  SimpleText(
+                    numberValue: rate,
+                    text: '€ /Monat',
+                    style: kNumberValueTextStyle,
+                  ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       inactiveTrackColor: Color(0xFF8D8E98),
@@ -110,7 +118,11 @@ class _HomepageState extends State<Homepage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        SimpleText(numberValue: yield, text: '% p.a.'),
+                        SimpleText(
+                          numberValue: yield,
+                          text: '% p.a.',
+                          style: kNumberValueTextStyle,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -149,7 +161,11 @@ class _HomepageState extends State<Homepage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        SimpleText(numberValue: years, text: 'Jahre'),
+                        SimpleText(
+                          numberValue: years,
+                          text: 'Jahre',
+                          style: kNumberValueTextStyle,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
