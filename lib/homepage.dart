@@ -193,11 +193,12 @@ class _HomepageState extends State<Homepage> {
                     builder: (context) => ResultPage(
                       budget: budget,
                       compoundInterest: compoundInterest(),
+                      years: years,
                     ),
                   ),
                 );
               },
-              buttonTitle: "Rechnen")
+              buttonTitle: "Berechnen")
         ],
       ),
     );

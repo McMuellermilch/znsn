@@ -14,3 +14,9 @@ const kNumberValueTextStyle = TextStyle(
   fontSize: 30.0,
   fontWeight: FontWeight.w400,
 );
+
+const kYieldValueTextStyle = TextStyle(
+  fontSize: 30.0,
+  fontWeight: FontWeight.w400,
+  color: Colors.green,
+);
