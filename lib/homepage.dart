@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:znsn/components/simple_button.dart';
 import 'package:znsn/components/simple_card.dart';
 import 'package:znsn/components/bottom_button.dart';
+import 'package:znsn/components/simple_empty_card.dart';
 import 'package:znsn/constants.dart';
 import 'package:znsn/components/simple_text.dart';
 import 'package:znsn/resultpage.dart';
@@ -17,9 +18,23 @@ class _HomepageState extends State<Homepage> {
   int rate = 0;
   int yield = 0;
   int years = 0;
+  int compoundingInterval = 12;
 
-  double compoundInterest() {
-    return budget * pow((1 + (yield / 100)), years);
+  //[ P(1+r/n)^(nt)]
+  double compoundInterestForPrincipal() {
+    //TODO Formula returns the wrong value
+    return budget *
+        (pow((1 + ((yield / 100) / compoundingInterval)),
+            compoundingInterval * yield));
+  }
+
+  //[ PMT × ( ((1 + r/n)^(nt) - 1) / (r/n) ) ]
+  double futureValueOfSeries() {
+    return rate *
+        (pow((1 + ((yield / 100) / compoundingInterval)),
+                compoundingInterval * yield) -
+            1) /
+        ((yield / 100) / compoundingInterval);
   }
 
   @override
@@ -106,6 +121,49 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ],
               ),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Expanded(
+                  child: SimpleCard(
+                    title: "Ausschüttungsintervall",
+                    cardChild: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: SimpleEmptyCard(
+                            text: "Monatlich",
+                            color: compoundingInterval == 12
+                                ? kBottomContainerColor
+                                : kInactiveCardColor,
+                            onTap: () {
+                              setState(() {
+                                compoundingInterval = 12;
+                              });
+                            },
+                          ),
+                        ),
+                        Expanded(
+                          child: SimpleEmptyCard(
+                            text: "Jährlich",
+                            color: compoundingInterval == 1
+                                ? kBottomContainerColor
+                                : kInactiveCardColor,
+                            onTap: () {
+                              setState(() {
+                                compoundingInterval = 1;
+                              });
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -208,7 +266,7 @@ class _HomepageState extends State<Homepage> {
                   MaterialPageRoute(
                     builder: (context) => ResultPage(
                       budget: budget,
-                      compoundInterest: compoundInterest(),
+                      compoundInterest: compoundInterestForPrincipal(),
                       years: years,
                     ),
                   ),
