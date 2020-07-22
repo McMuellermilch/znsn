@@ -22,10 +22,9 @@ class _HomepageState extends State<Homepage> {
 
   //[ P(1+r/n)^(nt)]
   double compoundInterestForPrincipal() {
-    //TODO Formula returns the wrong value
-    return budget *
-        (pow((1 + ((yield / 100) / compoundingInterval)),
-            compoundingInterval * yield));
+    return (budget *
+        pow((1 + ((yield / 100) / compoundingInterval)),
+            (compoundingInterval * years)));
   }
 
   //[ PMT × ( ((1 + r/n)^(nt) - 1) / (r/n) ) ]
@@ -266,7 +265,9 @@ class _HomepageState extends State<Homepage> {
                   MaterialPageRoute(
                     builder: (context) => ResultPage(
                       budget: budget,
-                      compoundInterest: compoundInterestForPrincipal(),
+                      //TODO combining initial compounding interest and future deposits doesn't work yet
+                      compoundInterest: compoundInterestForPrincipal() +
+                          futureValueOfSeries(),
                       years: years,
                     ),
                   ),
