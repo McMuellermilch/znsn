@@ -15,7 +15,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int budget = 0;
-  int rate = 0;
+  int monthlyPayment = 0;
   int yield = 0;
   int years = 0;
   int compoundingInterval = 12;
@@ -28,11 +28,15 @@ class _HomepageState extends State<Homepage> {
   }
 
   double futureValueOfSeries() {
-    return rate *
+    return monthlyPayment *
         ((pow((1 + ((yield / 100) / compoundingInterval)),
                 compoundingInterval * years)) -
             1) /
         ((yield / 100) / compoundingInterval);
+  }
+
+  int sumPayments() {
+    return (years * 12) * monthlyPayment;
   }
 
   @override
@@ -90,7 +94,7 @@ class _HomepageState extends State<Homepage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   SimpleText(
-                    numberValue: rate,
+                    numberValue: monthlyPayment,
                     text: '€ /Monat',
                     style: kNumberValueTextStyle,
                   ),
@@ -106,13 +110,13 @@ class _HomepageState extends State<Homepage> {
                           RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
-                      value: rate.toDouble(),
+                      value: monthlyPayment.toDouble(),
                       divisions: 100,
                       min: 0.0,
                       max: 5000.00,
                       onChanged: (double newValue) {
                         setState(() {
-                          rate = newValue.round();
+                          monthlyPayment = newValue.round();
                         });
                       },
                     ),
@@ -258,15 +262,17 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
           BottomButton(
+
+              //TODO: Finish rounding
+              //TODO: add decimal and thousands separators
+
               onTap: () {
-                print(compoundInterestForPrincipal());
                 print(futureValueOfSeries());
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultPage(
-                      budget: budget,
-                      //TODO combining initial compounding interest and future deposits doesn't work yet
+                      budget: budget + sumPayments(),
                       compoundInterest: compoundInterestForPrincipal() +
                           futureValueOfSeries(),
                       years: years,
