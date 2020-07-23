@@ -27,11 +27,10 @@ class _HomepageState extends State<Homepage> {
             (compoundingInterval * years)));
   }
 
-  //[ PMT × ( ((1 + r/n)^(nt) - 1) / (r/n) ) ]
   double futureValueOfSeries() {
     return rate *
-        (pow((1 + ((yield / 100) / compoundingInterval)),
-                compoundingInterval * yield) -
+        ((pow((1 + ((yield / 100) / compoundingInterval)),
+                compoundingInterval * years)) -
             1) /
         ((yield / 100) / compoundingInterval);
   }
@@ -110,7 +109,7 @@ class _HomepageState extends State<Homepage> {
                       value: rate.toDouble(),
                       divisions: 100,
                       min: 0.0,
-                      max: 20000.00,
+                      max: 5000.00,
                       onChanged: (double newValue) {
                         setState(() {
                           rate = newValue.round();
@@ -260,6 +259,8 @@ class _HomepageState extends State<Homepage> {
           ),
           BottomButton(
               onTap: () {
+                print(compoundInterestForPrincipal());
+                print(futureValueOfSeries());
                 Navigator.push(
                   context,
                   MaterialPageRoute(
