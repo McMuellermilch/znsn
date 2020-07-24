@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:znsn/components/simple_button.dart';
 import 'package:znsn/components/simple_card.dart';
@@ -20,7 +21,6 @@ class _HomepageState extends State<Homepage> {
   int years = 0;
   int compoundingInterval = 12;
 
-  //[ P(1+r/n)^(nt)]
   double compoundInterestForPrincipal() {
     return (budget *
         pow((1 + ((yield / 100) / compoundingInterval)),
@@ -55,10 +55,15 @@ class _HomepageState extends State<Homepage> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  SimpleText(
-                    numberValue: budget,
-                    text: '€',
-                    style: kNumberValueTextStyle,
+                  GestureDetector(
+                    onTap: () {
+                      print("gedrückt");
+                    },
+                    child: SimpleText(
+                      numberValue: budget,
+                      text: '€',
+                      style: kNumberValueTextStyle,
+                    ),
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
@@ -67,9 +72,9 @@ class _HomepageState extends State<Homepage> {
                       thumbColor: kBottomContainerColor,
                       overlayColor: kBottomContainerColorLight,
                       thumbShape:
-                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          RoundSliderThumbShape(enabledThumbRadius: 10.0),
                       overlayShape:
-                          RoundSliderOverlayShape(overlayRadius: 30.0),
+                          RoundSliderOverlayShape(overlayRadius: 20.0),
                     ),
                     child: Slider(
                       value: budget.toDouble(),
@@ -105,9 +110,9 @@ class _HomepageState extends State<Homepage> {
                       thumbColor: kBottomContainerColor,
                       overlayColor: kBottomContainerColorLight,
                       thumbShape:
-                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          RoundSliderThumbShape(enabledThumbRadius: 10.0),
                       overlayShape:
-                          RoundSliderOverlayShape(overlayRadius: 30.0),
+                          RoundSliderOverlayShape(overlayRadius: 20.0),
                     ),
                     child: Slider(
                       value: monthlyPayment.toDouble(),
@@ -265,18 +270,28 @@ class _HomepageState extends State<Homepage> {
           ),
           BottomButton(
               onTap: () {
-                print(futureValueOfSeries());
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultPage(
-                      budget: budget + sumPayments(),
-                      compoundInterest: compoundInterestForPrincipal() +
-                          futureValueOfSeries(),
-                      years: years,
+                if (budget > 0 || sumPayments() > 0) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(
+                        budget: budget + sumPayments(),
+                        compoundInterest: compoundInterestForPrincipal() +
+                            futureValueOfSeries(),
+                        years: years,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                            title: Text("Ohoh"),
+                            content: Text(
+                                "Bitte ein Startbudget oder Sparrate eingeben"));
+                      });
+                }
               },
               buttonTitle: "Berechnen")
         ],

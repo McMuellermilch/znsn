@@ -12,12 +12,12 @@ const kLargeButtonTextStyle = TextStyle(
 );
 
 const kNumberValueTextStyle = TextStyle(
-  fontSize: 30.0,
+  fontSize: 23.0,
   fontWeight: FontWeight.w400,
 );
 
 const kYieldValueTextStyle = TextStyle(
-  fontSize: 30.0,
+  fontSize: 25.0,
   fontWeight: FontWeight.w400,
   color: Colors.green,
 );

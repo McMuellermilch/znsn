@@ -9,7 +9,7 @@ class SimpleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.all(8.0),
+        margin: EdgeInsets.all(5.0),
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: Color(0x26ABABAB),
@@ -22,7 +22,7 @@ class SimpleCard extends StatelessWidget {
               child: Center(
                 child: Text(
                   title,
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w200),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w200),
                 ),
               ),
             ),
