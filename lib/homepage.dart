@@ -182,6 +182,7 @@ class _HomepageState extends State<Homepage> {
                           numberValue: yield,
                           text: '% p.a.',
                           style: kNumberValueTextStyle,
+                          simple: true,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -225,6 +226,7 @@ class _HomepageState extends State<Homepage> {
                           numberValue: years,
                           text: 'Jahre',
                           style: kNumberValueTextStyle,
+                          simple: true,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -262,10 +264,6 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
           BottomButton(
-
-              //TODO: Finish rounding
-              //TODO: add decimal and thousands separators
-
               onTap: () {
                 print(futureValueOfSeries());
                 Navigator.push(

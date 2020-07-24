@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:znsn/constants.dart';
 
 class SimpleText extends StatelessWidget {
-  SimpleText({@required this.numberValue, @required this.text, this.style});
+  SimpleText({this.numberValue, this.text, this.style, @required this.simple});
 
   final int numberValue;
   final String text;
   final TextStyle style;
+  final bool simple;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,9 @@ class SimpleText extends StatelessWidget {
       textBaseline: TextBaseline.alphabetic,
       children: <Widget>[
         Text(
-          numberValue.toString(),
+          simple == true
+              ? numberValue.toString()
+              : numberValue.toStringAsFixed(2),
           style: style,
         ),
         SizedBox(
