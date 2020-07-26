@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ZNSN',
       theme: ThemeData.dark(),
-      home: Homepage(),
+      home: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: Homepage()),
     );
   }
 }
