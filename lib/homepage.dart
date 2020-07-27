@@ -43,12 +43,6 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(currentIndex: 0, items: [
-        BottomNavigationBarItem(title: Text("Home"), icon: Icon(Icons.home)),
-        BottomNavigationBarItem(title: Text("dude"), icon: Icon(Icons.home)),
-        BottomNavigationBarItem(title: Text("dude"), icon: Icon(Icons.home)),
-        BottomNavigationBarItem(title: Text("dude"), icon: Icon(Icons.home)),
-      ]),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,44 +51,13 @@ class _HomepageState extends State<Homepage> {
             Expanded(
               child: SimpleCard(
                 title: "Startbudget",
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        print("gedrückt");
-                      },
-                      child: SimpleText(
-                        numberValue: budget,
-                        text: '€',
-                        style: kNumberValueTextStyle,
-                      ),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Color(0xFF8D8E98),
-                        activeTrackColor: Colors.white,
-                        thumbColor: kBottomContainerColor,
-                        overlayColor: kBottomContainerColorLight,
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 10.0),
-                        overlayShape:
-                            RoundSliderOverlayShape(overlayRadius: 20.0),
-                      ),
-                      child: Slider(
-                        value: budget.toDouble(),
-                        divisions: 1000,
-                        min: 0.0,
-                        max: 100000.00,
-                        onChanged: (double newValue) {
-                          setState(() {
-                            budget = newValue.round();
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                cardChild: NumberInputField(
+                    value: budget.toStringAsFixed(2),
+                    changeHandler: () {
+                      setState(() {
+                        budget = 4;
+                      });
+                    }),
               ),
             ),
             Expanded(
